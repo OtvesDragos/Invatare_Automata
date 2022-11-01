@@ -5,6 +5,7 @@ namespace WindowsFormsApplication1
     class Constants
     {
         public const int NR_PUNCTE = 100000;
+        public const int MARIME_PICTURE_BOX = 600;
 
         public static Zone[] GetZones()
         {

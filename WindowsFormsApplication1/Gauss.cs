@@ -11,7 +11,7 @@ namespace WindowsFormsApplication1
     class Gauss
     {
         double prag;
-        StreamWriter writer = new StreamWriter("E:\\Facultate\\invatare automata\\L1\\asta\\output.txt");
+        StreamWriter writer = new StreamWriter("output.txt");
 
         public Rectangle GetGaussValue(Zone zona, Random random)
         {
@@ -41,7 +41,7 @@ namespace WindowsFormsApplication1
             } while (resultY < prag);
 
             var point = CoordonatesConvert.GetPoint(x,y);
-            writer.WriteLine(point.X + " " + point.Y);
+            writer.WriteLine(x + " " + y);
            
             var size = new Size(2, 2);
             var rectangle = new Rectangle(point,size);

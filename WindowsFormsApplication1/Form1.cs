@@ -18,7 +18,7 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             PictureBox graph = new PictureBox();
-            graph.Size = new Size(500, 500);
+            graph.Size = new Size(Constants.MARIME_PICTURE_BOX, Constants.MARIME_PICTURE_BOX);
             graph.Location = new Point(0);
             graph.Paint += new PaintEventHandler(this.pictureBox1_Paint);
 
@@ -48,10 +48,10 @@ namespace WindowsFormsApplication1
 
         private void DrawAxes(PaintEventArgs e)
         {
-            var pointX1 = new Point(0, 300);
-            var pointX2 = new Point(600, 300);
-            var pointY1 = new Point(300, 0);
-            var pointY2 = new Point(300, 600);
+            var pointX1 = new Point(0, Constants.MARIME_PICTURE_BOX/2);
+            var pointX2 = new Point(Constants.MARIME_PICTURE_BOX, Constants.MARIME_PICTURE_BOX/2);
+            var pointY1 = new Point(Constants.MARIME_PICTURE_BOX/2, 0);
+            var pointY2 = new Point(Constants.MARIME_PICTURE_BOX/2, Constants.MARIME_PICTURE_BOX);
 
             e.Graphics.DrawLine(Pens.Red, pointX1, pointX2);
             e.Graphics.DrawLine(Pens.Red, pointY1, pointY2);
