@@ -4,14 +4,23 @@ namespace K_Means;
 
 public class Geometry
 {
+    static List<Cluster> clusters = new();
+
     public static void GroupPointsToCentroids(List<ColoredPoint> points, List<Centroid> centroids)
     {
+        clusters.AddRange(Cluster.GetClusterListFromCentroids(centroids));
+
         foreach (var coloredPoint in points)
         {
-            GroupPointsToCentroid(coloredPoint,centroids);
+            GroupPointToCentroid(coloredPoint,centroids);
+        }
+
+        foreach (var cluster in clusters)
+        {
+            cluster.GetCentruDeGreutate();
         }
     }
-    private static void GroupPointsToCentroid(ColoredPoint point, List<Centroid> centroids)
+    private static void GroupPointToCentroid(ColoredPoint point, List<Centroid> centroids)
     {
         double min = double.MaxValue;
         Centroid minCentroid = new Centroid();
@@ -25,6 +34,7 @@ public class Geometry
             }
         }
 
+        Cluster.GetClusterFromCentroid(clusters, minCentroid).points.Add(point);
         point.Color = minCentroid.Color;
     }
     private static double GetPointCentroidEuclideanDistance(ColoredPoint point, Centroid centroid)

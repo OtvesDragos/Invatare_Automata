@@ -1,31 +1,32 @@
-﻿namespace K_Means;
+﻿using WindowsFormsApplication1;
 
-public class Centroid
+namespace K_Means
 {
-    public Point Point { get; set; }
-    public readonly Size Size = new(10,10);
-    public Color Color { get; set; }
-
-    public static Centroid GetRandomCentroid(Random random)
+    public class Centroid
     {
-        return new Centroid
-        {
-            Point = new Point(random.Next(-300, 300), random.Next(-300,300)),
-            Color = Color.FromArgb(random.Next(256),
-                random.Next(256),
-                random.Next(256))
-        };
-    }
+        public Point Point { get; set; }
+        public readonly Size Size = new(10, 10);
+        public Color Color { get; set; }
 
-    public static List<Centroid> GetRandomCentroidList(Random random)
-    {
-        var index = random.Next(2, 10);
-        var list = new List<Centroid>();
-        for(int i = 0; i < index; i++)
+        public static Centroid GetRandomCentroid(Random random, int i)
         {
-            list.Add(GetRandomCentroid(random));
+            return new Centroid
+            {
+                Point = new Point(random.Next(-300, 300), random.Next(-300, 300)),
+                Color = WindowsFormsApplication1.Constants.PossibleColors[i]
+            };
         }
 
-        return list;
+        public static List<Centroid> GetRandomCentroidList(Random random)
+        {
+            var index = random.Next(2, 10);
+            var list = new List<Centroid>();
+            for (int i = 0; i < index; i++)
+            {
+                list.Add(GetRandomCentroid(random, i));
+            }
+
+            return list;
+        }
     }
 }

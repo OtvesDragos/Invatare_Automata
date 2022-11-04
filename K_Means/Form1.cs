@@ -25,6 +25,7 @@ namespace K_Means
 
             centroids = Centroid.GetRandomCentroidList(random);
             Geometry.GroupPointsToCentroids(points,centroids);
+
             graph.Paint += pictureBox1_Paint!;
 
             this.Controls.Add(graph);
