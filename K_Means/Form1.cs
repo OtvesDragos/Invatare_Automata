@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using Converter;
 using WindowsFormsApplication1;
 
 namespace K_Means
@@ -9,13 +10,16 @@ namespace K_Means
         private readonly Random random = new Random();
         private List<ColoredPoint> points;
         private List<Centroid> centroids;
+        private List<Cluster> clusters;
+        private PictureBox graph;
+        private FunctieConvergenta convergenta = new();
         public Form1()
         {
             InitializeComponent();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            PictureBox graph = new PictureBox();
+             graph = new PictureBox();
             graph.Size = new Size(WindowsFormsApplication1.Constants.MARIME_PICTURE_BOX, WindowsFormsApplication1.Constants.MARIME_PICTURE_BOX);
             graph.Location = new Point(0);
 
@@ -24,7 +28,7 @@ namespace K_Means
             points.AddRange(reader.ReadPointsFromFile());
 
             centroids = Centroid.GetRandomCentroidList(random);
-            Geometry.GroupPointsToCentroids(points,centroids);
+            clusters = Geometry.GroupPointsToCentroids(points,centroids);
 
             graph.Paint += pictureBox1_Paint!;
 
@@ -44,6 +48,9 @@ namespace K_Means
             foreach (var cendroid in centroids)
             {
                 var rect = new Rectangle(CoordonatesConvert.GetPoint(cendroid.Point), cendroid.Size);
+
+                Pen pen = new Pen(Color.Crimson, 3);
+                e.Graphics.DrawEllipse(pen, rect);
                 e.Graphics.FillEllipse(new SolidBrush(cendroid.Color), rect);
             }
         }
@@ -52,7 +59,7 @@ namespace K_Means
         {
             foreach (var point in points)
             {
-                var rect = new Rectangle(point.point, point.size);
+                var rect = new Rectangle(CoordonatesConvert.GetPoint(point.point), point.size);
                 e.Graphics.FillEllipse(new SolidBrush(point.Color), rect);
             }
         }
@@ -66,6 +73,28 @@ namespace K_Means
 
             e.Graphics.DrawLine(Pens.Red, pointX1, pointX2);
             e.Graphics.DrawLine(Pens.Red, pointY1, pointY2);
+        }
+
+        private void btnEpoca_Click(object sender, EventArgs e)
+        {
+            double convergentaInitiala, convergentaFinala = 0;
+            int i = 0;
+            do
+            {
+                i++;
+                convergentaInitiala = convergentaFinala;
+                foreach (var cluster in clusters)
+                {
+                    cluster.GetCentruDeGreutate();
+                }
+
+                clusters = Geometry.GroupPointsToCentroids(points, centroids);
+                convergentaFinala = convergenta.CalculFunctieConvergenta();
+                this.graph.Refresh();
+
+            } while ((int)convergentaFinala != (int)convergentaInitiala && i < 15);
+
+            MessageBox.Show("DONE!", "done", MessageBoxButtons.OK);
         }
     }
 }

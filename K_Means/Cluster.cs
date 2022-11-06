@@ -40,6 +40,12 @@ public class Cluster
     {
         int xAvg = 0;
         int yAvg = 0;
+
+        if (points.Count == 0)
+        {
+            return;
+        }
+
         foreach (var point in points)
         {
             xAvg += point.point.X;

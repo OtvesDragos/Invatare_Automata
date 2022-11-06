@@ -4,21 +4,18 @@ namespace K_Means;
 
 public class Geometry
 {
-    static List<Cluster> clusters = new();
+    public static List<Cluster> Clusters { get; } = new();
 
-    public static void GroupPointsToCentroids(List<ColoredPoint> points, List<Centroid> centroids)
+    public static List<Cluster> GroupPointsToCentroids(List<ColoredPoint> points, List<Centroid> centroids)
     {
-        clusters.AddRange(Cluster.GetClusterListFromCentroids(centroids));
+        Clusters.AddRange(Cluster.GetClusterListFromCentroids(centroids));
 
         foreach (var coloredPoint in points)
         {
             GroupPointToCentroid(coloredPoint,centroids);
         }
 
-        foreach (var cluster in clusters)
-        {
-            cluster.GetCentruDeGreutate();
-        }
+        return Clusters;
     }
     private static void GroupPointToCentroid(ColoredPoint point, List<Centroid> centroids)
     {
@@ -34,15 +31,13 @@ public class Geometry
             }
         }
 
-        Cluster.GetClusterFromCentroid(clusters, minCentroid).points.Add(point);
+        Cluster.GetClusterFromCentroid(Clusters, minCentroid).points.Add(point);
         point.Color = minCentroid.Color;
     }
-    private static double GetPointCentroidEuclideanDistance(ColoredPoint point, Centroid centroid)
+    public static double GetPointCentroidEuclideanDistance(ColoredPoint point, Centroid centroid)
     {
-        var pointToCheck = CoordonatesConvert.GetPoint(point.point.X, point.point.Y);
-        var centroidToCheck = CoordonatesConvert.GetPoint(centroid.Point.X, centroid.Point.Y);
 
-        return Math.Sqrt(Math.Pow(pointToCheck.X - centroidToCheck.X, 2) +
-                  Math.Pow(pointToCheck.Y - centroidToCheck.Y, 2));
+        return Math.Sqrt(Math.Pow(point.point.X - centroid.Point.X, 2) +
+                  Math.Pow(point.point.Y - centroid.Point.Y, 2));
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WindowsFormsApplication1;
+﻿using WindowsFormsApplication1;
 
 namespace K_Means
 {
@@ -23,10 +18,15 @@ namespace K_Means
 
                 if (numbers.Length == 2)
                 {
-                    var coloredPoint = CoordonatesConvert
-                        .GetPoint(int.Parse(numbers[0]), int.Parse(numbers[1]));
+                    var x = int.Parse(numbers[0]);
+                    var y = int.Parse(numbers[1]);
+                    if (x < -300 || x > 300 || y < -300 || y > 300)
+                    {
+                        throw new InvalidOperationException();
+                    }
+
                     points.Add(new
-                        ColoredPoint(coloredPoint));
+                        ColoredPoint(new Point(x,y)));
                 }
             }
 

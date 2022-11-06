@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using WindowsFormsApplication1;
 
-namespace WindowsFormsApplication1
+namespace Converter
 {
     public static class CoordonatesConvert
     {
@@ -15,46 +10,34 @@ namespace WindowsFormsApplication1
 
             if (y < 0)
             {
-                yEcran = -y + Constants.MARIME_PICTURE_BOX / 2;
+                yEcran = -y + WindowsFormsApplication1.Constants.MARIME_PICTURE_BOX / 2;
             } else
             {
-                yEcran = Constants.MARIME_PICTURE_BOX / 2 - y;
+                yEcran = WindowsFormsApplication1.Constants.MARIME_PICTURE_BOX / 2 - y;
             }
 
             if (x < 0)
             {
-                xEcran = x + Constants.MARIME_PICTURE_BOX / 2;
+                xEcran = x + WindowsFormsApplication1.Constants.MARIME_PICTURE_BOX / 2;
             } else
             {
-                xEcran = Constants.MARIME_PICTURE_BOX / 2 + x;
+                xEcran = WindowsFormsApplication1.Constants.MARIME_PICTURE_BOX / 2 + x;
+            }
+
+            if (xEcran < 0 || xEcran > WindowsFormsApplication1.Constants.MARIME_PICTURE_BOX || yEcran < 0 ||
+    yEcran > WindowsFormsApplication1.Constants.MARIME_PICTURE_BOX)
+            {
+                throw new InvalidOperationException();
             }
 
             return new Point(xEcran, yEcran);
         }
+
         public static Point GetPoint(Point point)
         {
-            int xEcran, yEcran;
             int x = point.X, y = point.Y;
 
-            if (y < 0)
-            {
-                yEcran = -y + Constants.MARIME_PICTURE_BOX / 2;
-            }
-            else
-            {
-                yEcran = Constants.MARIME_PICTURE_BOX / 2 - y;
-            }
-
-            if (x < 0)
-            {
-                xEcran = x + Constants.MARIME_PICTURE_BOX / 2;
-            }
-            else
-            {
-                xEcran = Constants.MARIME_PICTURE_BOX / 2 + x;
-            }
-
-            return new Point(xEcran, yEcran);
+            return GetPoint(x, y);
         }
     }
 }

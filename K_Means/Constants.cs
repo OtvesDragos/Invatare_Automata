@@ -5,7 +5,7 @@ namespace WindowsFormsApplication1
     class Constants
     {
         public const int MARIME_PICTURE_BOX = 600;
-        public static Color DefaultPointColor = Color.BlueViolet;
+        public static Color DefaultPointColor = Color.Black;
 
         public static List<Color> PossibleColors = new List<Color>
         {
@@ -13,7 +13,7 @@ namespace WindowsFormsApplication1
             Color.DarkOliveGreen,
             Color.Purple,
             Color.Yellow,
-            Color.Black,
+            Color.LightGreen,
             Color.OrangeRed,
             Color.Aqua,
             Color.GreenYellow,

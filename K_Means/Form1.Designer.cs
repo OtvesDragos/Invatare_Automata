@@ -28,13 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnEpoca = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // btnEpoca
+            // 
+            this.btnEpoca.Location = new System.Drawing.Point(433, 690);
+            this.btnEpoca.Name = "btnEpoca";
+            this.btnEpoca.Size = new System.Drawing.Size(154, 23);
+            this.btnEpoca.TabIndex = 0;
+            this.btnEpoca.Text = "Urmatoarea Epoca >>";
+            this.btnEpoca.UseVisualStyleBackColor = true;
+            this.btnEpoca.Click += new System.EventHandler(this.btnEpoca_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 853);
+            this.ClientSize = new System.Drawing.Size(584, 711);
+            this.Controls.Add(this.btnEpoca);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -43,5 +56,7 @@
         }
 
         #endregion
+
+        private Button btnEpoca;
     }
 }
