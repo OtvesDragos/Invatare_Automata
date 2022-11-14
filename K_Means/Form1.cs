@@ -19,7 +19,7 @@ namespace K_Means
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-             graph = new PictureBox();
+            graph = new PictureBox();
             graph.Size = new Size(WindowsFormsApplication1.Constants.MARIME_PICTURE_BOX, WindowsFormsApplication1.Constants.MARIME_PICTURE_BOX);
             graph.Location = new Point(0);
 
