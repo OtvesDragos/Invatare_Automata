@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace Self_Organizing_Map;
+﻿namespace Self_Organizing_Map;
 
 public class Neuron
 {
@@ -26,6 +24,5 @@ public class Neuron
     {
         Point.X = (int)(Point.X + learningRate * (input.X - Point.X));
         Point.Y = (int)(Point.Y + learningRate * (input.Y - Point.Y));
-
     }
 }

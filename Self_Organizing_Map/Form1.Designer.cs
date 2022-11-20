@@ -30,6 +30,7 @@
         {
             this.btnTrain = new System.Windows.Forms.Button();
             this.labelTime = new System.Windows.Forms.Label();
+            this.labelCountEpochs = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnTrain
@@ -51,11 +52,21 @@
             this.labelTime.TabIndex = 1;
             this.labelTime.Text = "Time Elapsed";
             // 
+            // labelCountEpochs
+            // 
+            this.labelCountEpochs.AutoSize = true;
+            this.labelCountEpochs.Location = new System.Drawing.Point(56, 636);
+            this.labelCountEpochs.Name = "labelCountEpochs";
+            this.labelCountEpochs.Size = new System.Drawing.Size(48, 20);
+            this.labelCountEpochs.TabIndex = 2;
+            this.labelCountEpochs.Text = "Count";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 703);
+            this.Controls.Add(this.labelCountEpochs);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.btnTrain);
             this.Name = "Form1";
@@ -70,5 +81,6 @@
 
         private Button btnTrain;
         private Label labelTime;
+        private Label labelCountEpochs;
     }
 }

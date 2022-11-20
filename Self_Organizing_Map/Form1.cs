@@ -85,9 +85,18 @@ namespace Self_Organizing_Map
             Stopwatch timer = new Stopwatch();
             timer.Start();
 
-            algoritm = new SOMaps(points, neurons, 25);
-            algoritm.Train();
-            graph.Refresh();
+            algoritm = new SOMaps(points, neurons, 18);
+            double learning = 10;
+            double iteration = 0;
+            labelCountEpochs.Text = "0";
+            while (learning > 0)
+            {
+                learning = algoritm.Train(iteration);
+                labelCountEpochs.Text = iteration.ToString();
+                labelCountEpochs.Refresh();
+                graph.Refresh();
+                iteration++;
+            }
 
             labelTime.Text += ": " + timer.Elapsed;
             timer.Stop();

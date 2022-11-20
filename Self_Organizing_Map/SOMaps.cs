@@ -13,11 +13,9 @@ public class SOMaps
         this.neurons = neurons;
         this.finalIteration = finalIteration;
     }
-    public void Train()
+    public double Train(double iteration)
     {
-        for (double iteration = 0; iteration < finalIteration; iteration++)
-        {
-            var currentRank = CalculateNeighborhoodRank(iteration);
+        var currentRank = CalculateNeighborhoodRank(iteration);
             learnRate = CalculateLearningRate(iteration);
 
             foreach (var point in points)
@@ -26,18 +24,19 @@ public class SOMaps
                 var winningNeuron = neurons.GetWinningNeuron(point, out coordX, out coordY);
                 UpdatePositions(coordX, coordY, currentRank, point);
             }
-        }
+
+            return learnRate;
     }
 
     private void UpdatePositions(int coordX, int coordY, double currentRank, Point input)
     {
-        var xStart = (int)(coordX - currentRank - 1);
+        var xStart = (int)(coordX - currentRank);
         xStart = (xStart < 0) ? 0 : xStart;
 
         var xEnd = (int)(xStart + (currentRank * 2) + 1);
         if (xEnd > neurons.length) xEnd = neurons.length;
 
-        var yStart = (int)(coordY- currentRank - 1);
+        var yStart = (int)(coordY- currentRank);
         yStart = (yStart < 0) ? 0 : yStart;
 
         var yEnd = (int)(yStart + (currentRank * 2) + 1);
@@ -49,10 +48,9 @@ public class SOMaps
             {
                 var processingNeuron = neurons.GetNeuron(i, j);
                 var distance = processingNeuron.GetEuclidianDistance(input);
-                if (distance <= Math.Pow(currentRank, 2))
-                {
-                    processingNeuron.UpdateNeuronsWithKohonen(input, learnRate);
-                }
+
+                processingNeuron.UpdateNeuronsWithKohonen(input, learnRate);
+                
             }
         }
     }
@@ -64,6 +62,8 @@ public class SOMaps
 
     private double CalculateLearningRate(double iteration)
     {
-        return 0.6 * Math.Pow(Math.E, -iteration / finalIteration);
+        var x = 0.6 * Math.Pow(Math.E, -iteration / finalIteration);
+
+        return x < 0.01 ? 0 : x;
     }
 }
