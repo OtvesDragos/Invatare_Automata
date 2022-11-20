@@ -7,7 +7,7 @@
 
         public List<Point> ReadPointsFromFile()
         {
-            string[] lines = System.IO.File.ReadAllLines(Path);
+            string[] lines = File.ReadAllLines(Path);
             IList<Point> points = new List<Point> ();
 
             foreach (string line in lines)

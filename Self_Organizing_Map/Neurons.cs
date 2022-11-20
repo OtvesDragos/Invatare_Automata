@@ -12,7 +12,7 @@ public class Neurons
         {
             for (int j = 0; j < length; j++)
             {
-                coordonates[i, j] = new Neuron(-300 + 60 * i, 300 - 60 * j );
+                coordonates[i, j] = new Neuron(-270 + 60 * i, 270 - 60 * j );
             }
         }
 
@@ -71,16 +71,33 @@ public class Neurons
     {
         return coordonates[x, y].Point;
     }
-}
 
-public class Neuron
-{
-    public Point Point;
-    public List<Neuron> Neighbourhood;
-
-    public Neuron(int x, int y)
+    public Neuron GetNeuron(int x, int y)
     {
-        Point = new Point(x, y);
-        Neighbourhood = new();
+        return coordonates[x, y];
+    }
+
+    public Neuron GetWinningNeuron(Point point, out int coordX, out int coordY)
+    {
+        var minDistance = Double.MaxValue;
+        coordX = -1;
+        coordY = -1;
+        var minNeuron = new Neuron();
+        for (int i = 0; i < length; i++)
+        {
+            for (int j = 0; j < length; j++)
+            {
+                var distance = coordonates[i, j].GetEuclidianDistance(point);
+                if (distance <= minDistance)
+                {
+                    minDistance = distance;
+                    minNeuron = coordonates[i, j];
+                    coordX = i;
+                    coordY = j;
+                }
+            }
+        }
+
+        return minNeuron;
     }
 }

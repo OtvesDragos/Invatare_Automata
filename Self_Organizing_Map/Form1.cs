@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Drawing;
 
@@ -9,6 +10,7 @@ namespace Self_Organizing_Map
         private List<Point>? points;
         private Neurons neurons = new(10);
         private PictureBox? graph;
+        private SOMaps algoritm;
         public Form1()
         {
             InitializeComponent();
@@ -62,6 +64,7 @@ namespace Self_Organizing_Map
             {
                 var rect = new Rectangle(CoordonatesConvert.GetPoint(point), Constants.PointSize);
                 e.Graphics.FillEllipse(new SolidBrush(Constants.DefaultPointColor), rect);
+                e.Graphics.DrawEllipse(Pens.BlueViolet, rect);
             }
         }
 
@@ -75,6 +78,19 @@ namespace Self_Organizing_Map
             Pen pen = new Pen(Color.Brown, 3);
             e.Graphics.DrawLine(pen, pointX1, pointX2);
             e.Graphics.DrawLine(pen, pointY1, pointY2);
+        }
+
+        private void btnTrain_Click(object sender, EventArgs e)
+        {
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            algoritm = new SOMaps(points, neurons, 25);
+            algoritm.Train();
+            graph.Refresh();
+
+            labelTime.Text += ": " + timer.Elapsed;
+            timer.Stop();
         }
     }
 }
