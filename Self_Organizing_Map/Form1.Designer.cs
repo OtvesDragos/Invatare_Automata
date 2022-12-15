@@ -31,6 +31,8 @@
             this.btnTrain = new System.Windows.Forms.Button();
             this.labelTime = new System.Windows.Forms.Label();
             this.labelCountEpochs = new System.Windows.Forms.Label();
+            this.labelVecinatate = new System.Windows.Forms.Label();
+            this.labelLearning = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnTrain
@@ -55,17 +57,37 @@
             // labelCountEpochs
             // 
             this.labelCountEpochs.AutoSize = true;
-            this.labelCountEpochs.Location = new System.Drawing.Point(56, 636);
+            this.labelCountEpochs.Location = new System.Drawing.Point(12, 636);
             this.labelCountEpochs.Name = "labelCountEpochs";
-            this.labelCountEpochs.Size = new System.Drawing.Size(48, 20);
+            this.labelCountEpochs.Size = new System.Drawing.Size(50, 20);
             this.labelCountEpochs.TabIndex = 2;
-            this.labelCountEpochs.Text = "Count";
+            this.labelCountEpochs.Text = "Epoca";
+            // 
+            // labelVecinatate
+            // 
+            this.labelVecinatate.AutoSize = true;
+            this.labelVecinatate.Location = new System.Drawing.Point(12, 674);
+            this.labelVecinatate.Name = "labelVecinatate";
+            this.labelVecinatate.Size = new System.Drawing.Size(78, 20);
+            this.labelVecinatate.TabIndex = 3;
+            this.labelVecinatate.Text = "Vecinatate";
+            // 
+            // labelLearning
+            // 
+            this.labelLearning.AutoSize = true;
+            this.labelLearning.Location = new System.Drawing.Point(12, 606);
+            this.labelLearning.Name = "labelLearning";
+            this.labelLearning.Size = new System.Drawing.Size(154, 20);
+            this.labelLearning.TabIndex = 4;
+            this.labelLearning.Text = "Coeficient de invatare";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 703);
+            this.Controls.Add(this.labelLearning);
+            this.Controls.Add(this.labelVecinatate);
             this.Controls.Add(this.labelCountEpochs);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.btnTrain);
@@ -82,5 +104,7 @@
         private Button btnTrain;
         private Label labelTime;
         private Label labelCountEpochs;
+        private Label labelVecinatate;
+        private Label labelLearning;
     }
 }

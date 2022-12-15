@@ -22,8 +22,7 @@
                 xEcran = Constants.MarimePictureBox / 2 + x;
             }
 
-            if (xEcran < 0 || xEcran > Constants.MarimePictureBox || yEcran < 0 ||
-    yEcran > Constants.MarimePictureBox)
+            if (xEcran is < 0 or > Constants.MarimePictureBox || yEcran is < 0 or > Constants.MarimePictureBox)
             {
                 throw new InvalidOperationException();
             }

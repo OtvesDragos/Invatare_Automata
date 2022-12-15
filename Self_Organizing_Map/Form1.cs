@@ -85,15 +85,21 @@ namespace Self_Organizing_Map
             Stopwatch timer = new Stopwatch();
             timer.Start();
 
-            algoritm = new SOMaps(points, neurons, 18);
-            double learning = 10;
+            algoritm = new SOMaps(points, neurons, 15);
+            double learning = 40;
             double iteration = 0;
             labelCountEpochs.Text = "0";
+            labelVecinatate.Text = "0";
+            double vecinatate;
             while (learning > 0)
             {
-                learning = algoritm.Train(iteration);
+                learning = algoritm.Train(iteration, out vecinatate);
                 labelCountEpochs.Text = iteration.ToString();
+                labelVecinatate.Text = vecinatate.ToString();
+                labelLearning.Text = learning.ToString();
+                labelLearning.Refresh();
                 labelCountEpochs.Refresh();
+                labelVecinatate.Refresh();
                 graph.Refresh();
                 iteration++;
             }

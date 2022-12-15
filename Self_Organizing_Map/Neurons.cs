@@ -12,7 +12,8 @@ public class Neurons
         {
             for (int j = 0; j < length; j++)
             {
-                coordonates[i, j] = new Neuron(-270 + 60 * i, 270 - 60 * j );
+                //coordonates[i, j] = new Neuron(-270 + 60 * i, 270 - 60 * j );
+                coordonates[i, j] = new Neuron(-270, 270);
             }
         }
 

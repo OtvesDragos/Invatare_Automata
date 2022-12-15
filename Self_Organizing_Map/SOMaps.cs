@@ -13,30 +13,31 @@ public class SOMaps
         this.neurons = neurons;
         this.finalIteration = finalIteration;
     }
-    public double Train(double iteration)
+
+    public double Train(double iteration, out double currentRank)
     {
-        var currentRank = CalculateNeighborhoodRank(iteration);
-            learnRate = CalculateLearningRate(iteration);
+        currentRank = CalculateNeighborhoodRank(iteration);
+        learnRate = CalculateLearningRate(iteration);
 
-            foreach (var point in points)
-            {
-                int coordX, coordY;
-                var winningNeuron = neurons.GetWinningNeuron(point, out coordX, out coordY);
-                UpdatePositions(coordX, coordY, currentRank, point);
-            }
+        foreach (var point in points)
+        {
+            int coordX, coordY;
+            var winningNeuron = neurons.GetWinningNeuron(point, out coordX, out coordY);
+            UpdatePositions(coordX, coordY, currentRank, point);
+        }
 
-            return learnRate;
+        return learnRate;
     }
 
     private void UpdatePositions(int coordX, int coordY, double currentRank, Point input)
     {
-        var xStart = (int)(coordX - currentRank);
+        var xStart = (int)(coordX - currentRank - 1);
         xStart = (xStart < 0) ? 0 : xStart;
 
         var xEnd = (int)(xStart + (currentRank * 2) + 1);
         if (xEnd > neurons.length) xEnd = neurons.length;
 
-        var yStart = (int)(coordY- currentRank);
+        var yStart = (int)(coordY - currentRank - 1);
         yStart = (yStart < 0) ? 0 : yStart;
 
         var yEnd = (int)(yStart + (currentRank * 2) + 1);
@@ -50,20 +51,21 @@ public class SOMaps
                 var distance = processingNeuron.GetEuclidianDistance(input);
 
                 processingNeuron.UpdateNeuronsWithKohonen(input, learnRate);
-                
+
             }
         }
     }
 
     private double CalculateNeighborhoodRank(double iteration)
     {
-        return 6.1 * Math.Pow(Math.E, -iteration / finalIteration) + 1;
+        return Math.Truncate(6.1 * Math.Pow(Math.E, -iteration / finalIteration));
+        
     }
 
     private double CalculateLearningRate(double iteration)
     {
-        var x = 0.6 * Math.Pow(Math.E, -iteration / finalIteration);
+        var x = 0.7 * Math.Pow(Math.E, -iteration / finalIteration);
 
-        return x < 0.01 ? 0 : x;
+        return x < 0.03 ? 0 : x;
     }
 }
