@@ -56,7 +56,7 @@ namespace Backprop
                 Console.WriteLine($"Intrare: {Out1[0]} {Out1[1]}");
                 Console.WriteLine($"Iesirea: {Out3[0]}");
                 Console.WriteLine($"Eroare: {Elocal}");
-                Console.WriteLine($"Eroare globala: {Eglobal}");
+                Console.WriteLine("_____________________________________");
                 BackwardOnline();
             }
 
@@ -131,6 +131,7 @@ namespace Backprop
                 Console.WriteLine($"Intrare: {Out1[0]} {Out1[1]}");
                 Console.WriteLine($"Iesirea: {Out3[0]}");
                 Console.WriteLine($"Eroare: {Elocal}");
+                Console.WriteLine("_____________________________________");
                 BackwardOffline();
             }
             for (int o = 0; o < nOut; o++)
@@ -189,6 +190,10 @@ namespace Backprop
         }
         private void BackwardOffline()
         {
+            sumaPrag2 = 0;
+            sumaPrag3 = 0;
+            sumaW12 = 0;
+            sumaW23 = 0;
             for (int o = 0; o < nOut; o++)
             {
                 sumaPrag3 += 2 * (Out3[o] - scop) * FDerivat(Out3[o]);
@@ -196,24 +201,24 @@ namespace Backprop
 
             for (int h = 0; h < nHidd; h++)
             {
-                double x = 0.0;
+                double suma = 0.0;
                 for (int o = 0; o < nOut; o++)
                 {
-                    x += (Out3[o] - scop) * FDerivat(Out3[o]) * W23[o, h];
+                    suma += (Out3[o] - scop) * FDerivat(Out3[o]) * W23[o, h];
                 }
-                sumaPrag2 += 2 * x * FDerivat(Out2[h]);
+                sumaPrag2 += 2 * suma * FDerivat(Out2[h]);
             }
 
             for (int h = 0; h < nHidd; h++)
             {
                 for (int i = 0; i < nIn; i++)
                 {
-                    double x = 0.0;
+                    double suma = 0.0;
                     for (int o = 0; o < nOut; o++)
                     {
-                        x += (Out3[o] - scop) * FDerivat(Out3[o]) * W23[o, h];
+                        suma += (Out3[o] - scop) * FDerivat(Out3[o]) * W23[o, h];
                     }
-                    sumaW12 += 2 * x * FDerivat(Out2[h]) * Out1[i];
+                    sumaW12 += 2 * suma * FDerivat(Out2[h]) * Out1[i];
                 }
             }
 

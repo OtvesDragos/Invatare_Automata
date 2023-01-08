@@ -8,18 +8,22 @@
             var backpropagation = new Backpropagation();
             Console.WriteLine("Scrie 0 pentru on-line si 1 pentru off-line");
             var input = Console.ReadLine();
+
             if (input.Equals("0"))
             {
-                do
+                for (int i = 0; i < 10000; i++)
                 {
                     backpropagation.BackPropagationOnline();
-                } while (backpropagation.Eglobal > 0.1);
+                }
             }
             else
             {
                 if (input.Equals("1"))
                 {
-                    backpropagation.BackPropagationOffline();
+                    for (int i = 0; i < 10; i++)
+                    {
+                        backpropagation.BackPropagationOffline();
+                    }
                 }
                 else
                 {
